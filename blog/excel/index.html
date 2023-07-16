@@ -1,0 +1,264 @@
+<!doctype html><html dir=ltr lang=en data-theme class="html theme--light"><head><title>Sorosh Nejad
+|
+Import to Excel functionality in Spring framework</title><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name=author content="Sorosh Nejad"><meta name=description content="Cloud engineer - Backend developer - AppSec speciallist"><link rel=stylesheet href=/scss/main.min.1147aa5bacb4bce677a0e264073829caedb82fd18ea07a5f1d80521f539d1c45.css integrity="sha256-EUeqW6y0vOZ3oOJkBzgpyu24L9GOoHpfHYBSH1OdHEU=" crossorigin=anonymous type=text/css><link rel=stylesheet href=/css/markupHighlight.min.73ccfdf28df555e11009c13c20ced067af3cb021504cba43644c705930428b00.css integrity="sha256-c8z98o31VeEQCcE8IM7QZ688sCFQTLpDZExwWTBCiwA=" crossorigin=anonymous type=text/css><link rel=stylesheet href=/fontawesome/css/fontawesome.min.7d272de35b410fb165377550cdf9c4d3a80fbbcc961e111914e4d5c0eaf5729f.css integrity="sha256-fSct41tBD7FlN3VQzfnE06gPu8yWHhEZFOTVwOr1cp8=" crossorigin=anonymous type=text/css><link rel=stylesheet href=/fontawesome/css/solid.min.55d8333481b07a08e07cf6f37319753a2b47e99f4c395394c5747b48b495aa9b.css integrity="sha256-VdgzNIGwegjgfPbzcxl1OitH6Z9MOVOUxXR7SLSVqps=" crossorigin=anonymous type=text/css><link rel=stylesheet href=/fontawesome/css/regular.min.a7448d02590b43449364b6b5922ed9af5410abb4de4238412a830316dedb850b.css integrity="sha256-p0SNAlkLQ0STZLa1ki7Zr1QQq7TeQjhBKoMDFt7bhQs=" crossorigin=anonymous type=text/css><link rel=stylesheet href=/fontawesome/css/brands.min.9ed75a5d670c953fe4df935937674b4646f92674367e9e66eb995bb04e821647.css integrity="sha256-ntdaXWcMlT/k35NZN2dLRkb5JnQ2fp5m65lbsE6CFkc=" crossorigin=anonymous type=text/css><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=canonical href=https://nejads.github.io/blog/excel/><script type=text/javascript src=/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js integrity="sha256-+RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/anatole-theme-switcher.min.d6d329d93844b162e8bed1e915619625ca91687952177552b9b3e211014a2957.js integrity="sha256-1tMp2ThEsWLovtHpFWGWJcqRaHlSF3VSubPiEQFKKVc=" crossorigin=anonymous></script><meta name=twitter:card content="summary"><meta name=twitter:title content="Import to Excel functionality in Spring framework"><meta name=twitter:description content="In this article we will see how to implement a back-end service in springboot applications to get some data in Excel format and serve it to the client. Generating huge excel file is CPU- and memory demanding. In other side, dependening on which version of excel will you generate, the file has limit e.g. Excel 2003 has max capacity on 65,535 rows. The chart below shows some facts about Excel file capacity."><meta property="og:title" content="Import to Excel functionality in Spring framework"><meta property="og:description" content="In this article we will see how to implement a back-end service in springboot applications to get some data in Excel format and serve it to the client. Generating huge excel file is CPU- and memory demanding. In other side, dependening on which version of excel will you generate, the file has limit e.g. Excel 2003 has max capacity on 65,535 rows. The chart below shows some facts about Excel file capacity."><meta property="og:type" content="article"><meta property="og:url" content="https://nejads.github.io/blog/excel/"><meta property="article:section" content="blog"><meta property="article:published_time" content="2018-06-12T13:42:51+02:00"><meta property="article:modified_time" content="2023-07-16T18:55:15+02:00"><meta property="og:site_name" content="Sorosh Nejad"><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","articleSection":"blog","name":"Import to Excel functionality in Spring framework","headline":"Import to Excel functionality in Spring framework","alternativeHeadline":"","description":"
+      
+        In this article we will see how to implement a back-end service in springboot applications to get some data in Excel format and serve it to the client. Generating huge excel file is CPU- and memory demanding. In other side, dependening on which version of excel will you generate, the file has limit e.g. Excel 2003 has max capacity on 65,535 rows. The chart below shows some facts about Excel file capacity.
+
+
+      
+
+
+    ","inLanguage":"en-us","isFamilyFriendly":"true","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/nejads.github.io\/blog\/excel\/"},"author":{"@type":"Person","name":"Sorosh Nejad"},"creator":{"@type":"Person","name":"Sorosh Nejad"},"accountablePerson":{"@type":"Person","name":"Sorosh Nejad"},"copyrightHolder":{"@type":"Person","name":"Sorosh Nejad"},"copyrightYear":"2018","dateCreated":"2018-06-12T13:42:51.00Z","datePublished":"2018-06-12T13:42:51.00Z","dateModified":"2023-07-16T18:55:15.00Z","publisher":{"@type":"Organization","name":"Sorosh Nejad","url":"https://nejads.github.io/","logo":{"@type":"ImageObject","url":"https:\/\/nejads.github.io\/favicon-32x32.png","width":"32","height":"32"}},"image":[],"url":"https:\/\/nejads.github.io\/blog\/excel\/","wordCount":"966","genre":[],"keywords":[]}</script></head><body class=body><div class=wrapper><aside class=wrapper__sidebar><div class="sidebar
+animated fadeInDown"><div class=sidebar__content><div class=sidebar__introduction><img class=sidebar__introduction-profileimage src=/images/profile2.jpg alt="profile picture"><div class=sidebar__introduction-title><a href=/>Sorosh Nejad</a></div><div class=sidebar__introduction-description><p>Cloud engineer - Backend developer - AppSec speciallist</p></div></div><ul class=sidebar__list><li class=sidebar__list-item><a href=https://github.com/nejads target=_blank rel="noopener me" aria-label=GitHub title=GitHub><i class="fab fa-github fa-2x" aria-hidden=true></i></a></li><li class=sidebar__list-item><a href=mailto:nejads[@]me[.]com target=_blank rel="noopener me" aria-label=e-mail title=e-mail><i class="fas fa-envelope fa-2x" aria-hidden=true></i></a></li><li class=sidebar__list-item><a href=https://linkedin.com/in/nejads/ target=_blank rel="noopener me" aria-label=LinkedIn title=LinkedIn><i class="fab fa-linkedin fa-2x" aria-hidden=true></i></a></li></ul></div><footer class="footer footer__sidebar"><ul class=footer__list><li class=footer__item>&copy;
+Sorosh Nejad, 2015-2023</li></ul></footer><script type=text/javascript src=/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ=" crossorigin=anonymous></script></div></aside><main class=wrapper__main><header class=header><div class="animated fadeInDown"><a role=button class=navbar-burger data-target=navMenu aria-label=menu aria-expanded=false><span aria-hidden=true class=navbar-burger__line></span>
+<span aria-hidden=true class=navbar-burger__line></span>
+<span aria-hidden=true class=navbar-burger__line></span></a><nav class=nav><ul class=nav__list id=navMenu><li class=nav__list-item><a href=/ title>Home</a></li><li class=nav__list-item><a href=/blog/ title>Blog</a></li><li class=nav__list-item><a href=https://github.com/nejads/til target=_blank rel="noopener noreferrer" title>Today I Learned</a></li><li class=nav__list-item><a href=about title>About</a></li><li class=nav__list-item><a href=/files/cv.pdf title>CV</a></li></ul><ul class="nav__list nav__list--end"><li class=nav__list-item><div class=themeswitch><a title="Switch Theme"><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></li></ul></nav></div></header><div class="post
+animated fadeInDown"><div class=post__content><h1>Import to Excel Functionality in Spring Framework</h1><p>In this article we will see how to implement a back-end service in springboot applications to get some data in Excel format and serve it to the client. Generating huge excel file is CPU- and memory demanding. In other side, dependening on which version of excel will you generate, the file has limit e.g. Excel 2003 has max capacity on 65,535 rows. The chart below shows some facts about Excel file capacity. For full description on different version of Excel, pleas check <a href=https://superuser.com/questions/366468/what-is-the-maximum-allowed-rows-in-a-microsoft-excel-xls-or-xlsx>this answer on StachExchange</a>.</p><table><thead><tr><th></th><th>Max. Rows</th><th>Max. Columns</th><th>Max. Cols by letter</th></tr></thead><tbody><tr><td>Excel 365*</td><td>1,048,576</td><td>16,384</td><td>XFD</td></tr><tr><td>Excel 2013</td><td>1,048,576</td><td>16,384</td><td>XFD</td></tr><tr><td>Excel 2010</td><td>1,048,576</td><td>16,384</td><td>XFD</td></tr><tr><td>Excel 2007</td><td>1,048,576</td><td>16,384</td><td>XFD</td></tr><tr><td>Excel 2003</td><td>65,536</td><td>256</td><td>IV</td></tr><tr><td>Excel 2002 (XP)</td><td>65,536</td><td>256</td><td>IV</td></tr><tr><td>Excel 2000</td><td>65,536</td><td>256</td><td>IV</td></tr><tr><td>Excel 97</td><td>65,536</td><td>256</td><td>IV</td></tr><tr><td>Excel 95</td><td>16,384</td><td>256</td><td>IV</td></tr><tr><td>Excel 5</td><td>16,384</td><td>256</td><td>IV</td></tr></tbody></table><p>We as developer must be aware of those limitations and validate a request and if it would go over the boundries, cast out an fault message&mldr;.
+In this solution I will present reactive programming in writing REST APIs and use streams to get result to the client. In this manner I&rsquo;ll try to reach a good enough performance in an enterprice application.</p><p>The most important lesson for me in implementing this kind of service was the performace of the query in native query way and non-native query like using ORM. With usign native query I reduced query time significant from 12 seconds to 0.34 second.</p><h2 id=a-use-case>A Use case</h2><p>Imagine we want to list a bookstore&rsquo;s books in a period of time and import this information to Excel file. Each book can has one or more writers and it belongs to a bookstore. In the query we will specify startdate and stopdate. The book&rsquo;s publish date shall place in that period.</p><h3 id=how-to-implement>How to implement</h3><p>My simple endpoint looks like as below. I definitly want to handle this kind of requests asynchronously. I do not want to this heavy requests stop the functionality of my web service.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>@Component
+</span></span><span style=display:flex><span>@Path<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;/v1&#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>public class BookApi <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    private final BookstoreObservables bookstoreObservables;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    @Autowired
+</span></span><span style=display:flex><span>    public BookApi<span style=color:#f92672>(</span>BookstoreObservables bookstoreObservables<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        this.bookstoreObservables <span style=color:#f92672>=</span> bookstoreObservables;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    @GET
+</span></span><span style=display:flex><span>    @ManagedAsync
+</span></span><span style=display:flex><span>    @Produces<span style=color:#f92672>({</span><span style=color:#e6db74>&#34;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&#34;</span><span style=color:#f92672>})</span>
+</span></span><span style=display:flex><span>    @Path<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;/bookstore/{bookstoresId}/books/export&#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>    public void getBookExcelByBookstoresId<span style=color:#f92672>(</span>
+</span></span><span style=display:flex><span>        @Context HttpServletRequest request,
+</span></span><span style=display:flex><span>        @Suspended AsyncResponse response,
+</span></span><span style=display:flex><span>        @Min<span style=color:#f92672>(</span>value <span style=color:#f92672>=</span> 1<span style=color:#f92672>)</span> @PathParam<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;bookstoresId&#34;</span><span style=color:#f92672>)</span> Long bookstoresId,
+</span></span><span style=display:flex><span>        @QueryParam<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;writer&#34;</span><span style=color:#f92672>)</span> List&lt;String&gt; writers,
+</span></span><span style=display:flex><span>        @QueryParam<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;startPeriod&#34;</span><span style=color:#f92672>)</span> String startPeriod,
+</span></span><span style=display:flex><span>        @QueryParam<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;stoppPeriod&#34;</span><span style=color:#f92672>)</span> String stoppPeriod<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        doInContext<span style=color:#f92672>(</span>request, response, ctx -&gt;
+</span></span><span style=display:flex><span>                bookstoreObservables.getBookExcel<span style=color:#f92672>(</span>ctx, bookstoresId, writers, startPeriod, stoppPeriod<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>                        .map<span style=color:#f92672>(</span>resp -&gt; Response.status<span style=color:#f92672>(</span>Response.Status.OK<span style=color:#f92672>)</span>.entity<span style=color:#f92672>(</span>resp.getDokument<span style=color:#f92672>())</span>
+</span></span><span style=display:flex><span>                                .type<span style=color:#f92672>(</span>StringUtils.isNotBlank<span style=color:#f92672>(</span>resp.getMimeTyp<span style=color:#f92672>())</span> ?
+</span></span><span style=display:flex><span>                                        resp.getMimeTyp<span style=color:#f92672>()</span> : MimeTypeUtils.ALL_VALUE<span style=color:#f92672>)</span>.build<span style=color:#f92672>())</span>
+</span></span><span style=display:flex><span>                        .onErrorResumeNext<span style=color:#f92672>(</span>t -&gt; Single.error<span style=color:#f92672>(</span>t instanceof ErrorException ? translateFieldErrors<span style=color:#f92672>((</span>ErrorException<span style=color:#f92672>)</span>t, exceptionFieldReplacements<span style=color:#f92672>)</span> : t<span style=color:#f92672>))</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>Middle layer to create DTOs and validate incoming request before service layer.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>@Component
+</span></span><span style=display:flex><span>public class BookstoreObservables <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    private BookExcelService bookExcelService;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    @Autowired
+</span></span><span style=display:flex><span>    public BookExcelService<span style=color:#f92672>(</span>BookRepository bookExcelService<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        this.bookExcelService <span style=color:#f92672>=</span> bookExcelService;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    public Single&lt;GetBookExcelResponse&gt; getBookExcel<span style=color:#f92672>(</span>ApplicationContext ctx, Long bookstoresId, List&lt;Long&gt; writers, String startPeriod, String stoppPeriod<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        // ValidatemessageAndBreakOnErrors<span style=color:#f92672>()</span>;
+</span></span><span style=display:flex><span>        GetBookExcelDto getBookExcelDto <span style=color:#f92672>=</span> new GetBookExcel<span style=color:#f92672>()</span>;
+</span></span><span style=display:flex><span>        getBookExcelDto.setBookstoresId<span style=color:#f92672>(</span>bookstoresId<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        getBookExcelDto.setPeriodStart<span style=color:#f92672>(</span>startPeriod<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        getBookExcelDto.setPeriodStop<span style=color:#f92672>(</span>stoppPeriod<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        writers.forEach<span style=color:#f92672>(</span>writer -&gt; getBookExcelDto.getWriters.add<span style=color:#f92672>(</span>writer<span style=color:#f92672>))</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> bookExcelService.processMessage<span style=color:#f92672>(</span>ctx, getBookExcelDto<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>Service layer which use Apache poi to generate Excel file and strem it to upper layer.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>@Service
+</span></span><span style=display:flex><span>public class BookExcelService <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    private static final int MAX_NUMBER_OF_ROWS <span style=color:#f92672>=</span> 10000;
+</span></span><span style=display:flex><span>    private BookRepository bookRepository;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    @Autowired
+</span></span><span style=display:flex><span>    public BookExcelService<span style=color:#f92672>(</span>BookRepository bookRepository<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        this.bookRepository <span style=color:#f92672>=</span> bookRepository;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    public GetBookExcelResponse processMessage<span style=color:#f92672>(</span>GetBookExcelDto req<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        ByteArrayOutputStream outputStream <span style=color:#f92672>=</span> null;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        try <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            outputStream <span style=color:#f92672>=</span> new ByteArrayOutputStream<span style=color:#f92672>()</span>;
+</span></span><span style=display:flex><span>            getBooksAsExcelFile<span style=color:#f92672>(</span>
+</span></span><span style=display:flex><span>                    outputStream,
+</span></span><span style=display:flex><span>                    req.getBookstoresId<span style=color:#f92672>()</span>,
+</span></span><span style=display:flex><span>                    req.getWritersId<span style=color:#f92672>()</span>,
+</span></span><span style=display:flex><span>                    req.getPeriodStart<span style=color:#f92672>()</span>,
+</span></span><span style=display:flex><span>                    req.getPeriodStop<span style=color:#f92672>())</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> catch <span style=color:#f92672>(</span>IOException e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            e.printStackTrace<span style=color:#f92672>()</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> finally <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>outputStream !<span style=color:#f92672>=</span> null<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                try <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    outputStream.close<span style=color:#f92672>()</span>;
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span> catch <span style=color:#f92672>(</span>IOException e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    e.printStackTrace<span style=color:#f92672>()</span>;
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    private void getBooksAsExcelFile<span style=color:#f92672>(</span>OutputStream outputStream, long bookstoresId, List&lt;String&gt; writers,
+</span></span><span style=display:flex><span>                                            Period periodStart, Period periodEnd<span style=color:#f92672>)</span> throws IOException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        List&lt;BookExcel&gt; books <span style=color:#f92672>=</span> BookRepository.findBooks<span style=color:#f92672>(</span>bookstoresId, writersId, periodStart, periodEnd<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>books.size<span style=color:#f92672>()</span> &gt; MAX_NUMBER_OF_ROWS<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            throw new Exception<span style=color:#f92672>(</span>String.format<span style=color:#f92672>(</span>
+</span></span><span style=display:flex><span>                    <span style=color:#e6db74>&#34;The query result is more than maximum allowed rows %s&#34;</span>, MAX_NUMBER_OF_ROWS<span style=color:#f92672>))</span>;
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        SXSSFWorkbook workbook <span style=color:#f92672>=</span> new SXSSFWorkbook<span style=color:#f92672>()</span>;
+</span></span><span style=display:flex><span>        SXSSFSheet sheet <span style=color:#f92672>=</span> workbook.createSheet<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Bookstore&#34;</span><span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        createParameters<span style=color:#f92672>(</span>workbook, bookstoresId, periodStart, periodEnd<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        createHeader<span style=color:#f92672>(</span>workbook<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        sheet.createFreezePane<span style=color:#f92672>(</span>0, 5<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        createBooks<span style=color:#f92672>(</span>workbook, books<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        workbook.write<span style=color:#f92672>(</span>outputStream<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        workbook.dispose<span style=color:#f92672>()</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    private void createParameters<span style=color:#f92672>(</span>SXSSFWorkbook workbook, long bookstoresId, Period periodStart, Period periodEnd<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        SXSSFSheet sheet <span style=color:#f92672>=</span> workbook.getSheetAt<span style=color:#f92672>(</span>0<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        int rownum <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        BookstoreDto bookstore <span style=color:#f92672>=</span> bookstoreService.getBookstoreByBookstoresId<span style=color:#f92672>(</span>bookstoresId<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        Row r <span style=color:#f92672>=</span> sheet.createRow<span style=color:#f92672>(</span>rownum++<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        r.createCell<span style=color:#f92672>(</span>0, CellType.STRING<span style=color:#f92672>)</span>.setCellValue<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Bookstore:&#34;</span><span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        r.createCell<span style=color:#f92672>(</span>1, CellType.STRING<span style=color:#f92672>)</span>.setCellValue<span style=color:#f92672>(</span>foretag.getNamn<span style=color:#f92672>())</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        r <span style=color:#f92672>=</span> sheet.createRow<span style=color:#f92672>(</span>rownum++<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        r.createCell<span style=color:#f92672>(</span>0, CellType.STRING<span style=color:#f92672>)</span>.setCellValue<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Periods:&#34;</span><span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        r.createCell<span style=color:#f92672>(</span>1, CellType.STRING<span style=color:#f92672>)</span>.setCellValue<span style=color:#f92672>(</span>periodStart.getValue<span style=color:#f92672>()</span> + <span style=color:#e6db74>&#34; - &#34;</span> + periodEnd.getValue<span style=color:#f92672>())</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    private void createHeader<span style=color:#f92672>(</span>SXSSFWorkbook workbook<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        SXSSFSheet sheet <span style=color:#f92672>=</span> workbook.getSheetAt<span style=color:#f92672>(</span>0<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        Row header <span style=color:#f92672>=</span> sheet.createRow<span style=color:#f92672>(</span>4<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        header.createCell<span style=color:#f92672>(</span>0, CellType.STRING<span style=color:#f92672>)</span>.setCellValue<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Book&#34;</span><span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        sheet.setColumnWidth<span style=color:#f92672>(</span>0, <span style=color:#ae81ff>14</span> * 256<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        header.createCell<span style=color:#f92672>(</span>2, CellType.STRING<span style=color:#f92672>)</span>.setCellValue<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Period&#34;</span><span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        sheet.setColumnWidth<span style=color:#f92672>(</span>2, <span style=color:#ae81ff>8</span> * 256<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        header.createCell<span style=color:#f92672>(</span>5, CellType.STRING<span style=color:#f92672>)</span>.setCellValue<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;BooksPublishdatum&#34;</span><span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        sheet.setColumnWidth<span style=color:#f92672>(</span>5, <span style=color:#ae81ff>18</span> * 256<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        header.createCell<span style=color:#f92672>(</span>6, CellType.STRING<span style=color:#f92672>)</span>.setCellValue<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Description&#34;</span><span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        sheet.setColumnWidth<span style=color:#f92672>(</span>6, <span style=color:#ae81ff>22</span> * 256<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        header.createCell<span style=color:#f92672>(</span>7, CellType.STRING<span style=color:#f92672>)</span>.setCellValue<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Text&#34;</span><span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        sheet.setColumnWidth<span style=color:#f92672>(</span>7, <span style=color:#ae81ff>22</span> * 256<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        CellStyle headerStyle <span style=color:#f92672>=</span> workbook.createCellStyle<span style=color:#f92672>()</span>;
+</span></span><span style=display:flex><span>        Font headerFont <span style=color:#f92672>=</span> workbook.createFont<span style=color:#f92672>()</span>;
+</span></span><span style=display:flex><span>        headerFont.setBold<span style=color:#f92672>(</span>true<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        headerStyle.setFont<span style=color:#f92672>(</span>headerFont<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        header.cellIterator<span style=color:#f92672>()</span>.forEachRemaining<span style=color:#f92672>(</span>cell -&gt; cell.setCellStyle<span style=color:#f92672>(</span>headerStyle<span style=color:#f92672>))</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    private void createTransaktioner<span style=color:#f92672>(</span>SXSSFWorkbook workbook, List&lt;BookExcel&gt; books<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        SXSSFSheet sheet <span style=color:#f92672>=</span> workbook.getSheetAt<span style=color:#f92672>(</span>0<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        int rownum <span style=color:#f92672>=</span> 5;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        CellStyle currencyStyle <span style=color:#f92672>=</span> workbook.createCellStyle<span style=color:#f92672>()</span>;
+</span></span><span style=display:flex><span>        DataFormat currencyFormat <span style=color:#f92672>=</span> workbook.createDataFormat<span style=color:#f92672>()</span>;
+</span></span><span style=display:flex><span>        currencyStyle.setDataFormat<span style=color:#f92672>(</span>currencyFormat.getFormat<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;#,##0.00&#34;</span><span style=color:#f92672>))</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        DateTimeFormatter formatter <span style=color:#f92672>=</span> DateTimeFormatter.ofPattern<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;yyyy-MM-dd&#34;</span><span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span>BookExcel book : books<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            Row row <span style=color:#f92672>=</span> sheet.createRow<span style=color:#f92672>(</span>rownum++<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            row.createCell<span style=color:#f92672>(</span>0, CellType.STRING<span style=color:#f92672>)</span>.setCellValue<span style=color:#f92672>(</span>book.getName<span style=color:#f92672>())</span>;
+</span></span><span style=display:flex><span>            row.createCell<span style=color:#f92672>(</span>2, CellType.NUMERIC<span style=color:#f92672>)</span>.setCellValue<span style=color:#f92672>(</span>book.getPeriod<span style=color:#f92672>()</span>.toInteger<span style=color:#f92672>())</span>;
+</span></span><span style=display:flex><span>            row.createCell<span style=color:#f92672>(</span>5, CellType.STRING<span style=color:#f92672>)</span>.setCellValue<span style=color:#f92672>(</span>formatter.format<span style=color:#f92672>(</span>book.getBookPublishDate<span style=color:#f92672>()))</span>;
+</span></span><span style=display:flex><span>            row.createCell<span style=color:#f92672>(</span>6, CellType.STRING<span style=color:#f92672>)</span>.setCellValue<span style=color:#f92672>(</span>book.getDescription<span style=color:#f92672>())</span>;
+</span></span><span style=display:flex><span>            row.createCell<span style=color:#f92672>(</span>7, CellType.STRING<span style=color:#f92672>)</span>.setCellValue<span style=color:#f92672>(</span>book.getText<span style=color:#f92672>())</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            Cell belopp <span style=color:#f92672>=</span> row.createCell<span style=color:#f92672>(</span>10, CellType.NUMERIC<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>            belopp.setCellValue<span style=color:#f92672>(</span>t.getBelopp<span style=color:#f92672>()</span>.getAmount<span style=color:#f92672>()</span>.doubleValue<span style=color:#f92672>())</span>;
+</span></span><span style=display:flex><span>            belopp.setCellStyle<span style=color:#f92672>(</span>currencyStyle<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            Cell moms <span style=color:#f92672>=</span> row.createCell<span style=color:#f92672>(</span>11, CellType.NUMERIC<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>            moms.setCellValue<span style=color:#f92672>(</span>t.getMoms<span style=color:#f92672>()</span>.getAmount<span style=color:#f92672>()</span>.doubleValue<span style=color:#f92672>())</span>;
+</span></span><span style=display:flex><span>            moms.setCellStyle<span style=color:#f92672>(</span>currencyStyle<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            row.createCell<span style=color:#f92672>(</span>12, CellType.STRING<span style=color:#f92672>)</span>.setCellValue<span style=color:#f92672>(</span>t.getVerifikationsnummer<span style=color:#f92672>())</span>;
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>The BookExcelDto and repository layer</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>
+</span></span><span style=display:flex><span>public class BookExcel <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    //Attributes, Constructors, Getter and setter
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>public interface BookRepository <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    List&lt;BookExcel&gt; findBooks<span style=color:#f92672>(</span>long bookstoresId, List&lt;Long&gt; writersId, Period startPeriod, Period stopPeriod<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>@Repository
+</span></span><span style=display:flex><span>public class BookRepositoryImpl implements BookRepository <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    @Autowired
+</span></span><span style=display:flex><span>    private EntityManager em;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    public List&lt;BookExcel&gt; findBooks<span style=color:#f92672>(</span>long bookstoresId, List&lt;Long&gt; writersId, Period startPeriod, Period stopPeriod<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        String query <span style=color:#f92672>=</span>
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;select book.name, bookstore.name, writer.name, book.publish_date&#34;</span> +
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;from book book &#34;</span> +
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;join bookstore bookstore     on bookstore.id = book.fk_bookstore &#34;</span> +
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;join writer writer           on writer.id = book.fk_writer &#34;</span> +
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;where bookstore.id = :bookstoresId &#34;</span> +
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;and book.publish_date &gt;= :startPeriod &#34;</span> +
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;and book.publish_date &lt;= :stopPeriod &#34;</span> +
+</span></span><span style=display:flex><span>                <span style=color:#f92672>(</span>isNotEmpty<span style=color:#f92672>(</span>writersId<span style=color:#f92672>)</span> ? <span style=color:#e6db74>&#34;and (writer.id in :writersId) &#34;</span> : <span style=color:#e6db74>&#34;&#34;</span><span style=color:#f92672>)</span> +
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;order by book.name, book.publish_date, book.id&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        Query nativeQuery <span style=color:#f92672>=</span> em.createNativeQuery<span style=color:#f92672>(</span>query<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        nativeQuery.setParameter<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;bookstoresId&#34;</span>, bookstoresId<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        nativeQuery.setParameter<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;writersId&#34;</span>, writersId<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        nativeQuery.setParameter<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;startPeriod&#34;</span>, Integer.valueOf<span style=color:#f92672>(</span>startPeriod.getValue<span style=color:#f92672>()))</span>;
+</span></span><span style=display:flex><span>        nativeQuery.setParameter<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;stopPeriod&#34;</span>, Integer.valueOf<span style=color:#f92672>(</span>stopPeriod.getValue<span style=color:#f92672>()))</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>isNotEmpty<span style=color:#f92672>(</span>writersId<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            nativeQuery.setParameter<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;writersId&#34;</span>, writersId<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        List&lt;Object<span style=color:#f92672>[]</span>&gt; resultList <span style=color:#f92672>=</span> nativeQuery.getResultList<span style=color:#f92672>()</span>;
+</span></span><span style=display:flex><span>        List&lt;BookExcel&gt; Books <span style=color:#f92672>=</span> new ArrayList&lt;&gt;<span style=color:#f92672>()</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        DateTimeFormatter formatter <span style=color:#f92672>=</span> DateTimeFormatter.ofPattern<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;yyyy-MM-dd&#34;</span><span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        resultList.forEach<span style=color:#f92672>(</span>objects -&gt; <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            BookExcel book <span style=color:#f92672>=</span> new BookExcel<span style=color:#f92672>(</span>
+</span></span><span style=display:flex><span>                    JdbcMappingUtils.toString<span style=color:#f92672>(</span>objects<span style=color:#f92672>[</span>0<span style=color:#f92672>])</span>,
+</span></span><span style=display:flex><span>                    JdbcMappingUtils.toString<span style=color:#f92672>(</span>objects<span style=color:#f92672>[</span>1<span style=color:#f92672>])</span>,
+</span></span><span style=display:flex><span>                    JdbcMappingUtils.toString<span style=color:#f92672>(</span>objects<span style=color:#f92672>[</span>3<span style=color:#f92672>])</span>,
+</span></span><span style=display:flex><span>                    LocalDate.parse<span style=color:#f92672>(</span>JdbcMappingUtils.toString<span style=color:#f92672>(</span>objects<span style=color:#f92672>[</span>4<span style=color:#f92672>])</span>, formatter<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            Books.add<span style=color:#f92672>(</span>book<span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>        <span style=color:#f92672>})</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> Books;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p><strong>Free Software, Hell Yeah!</strong></p></div><div class=post__footer></div></div></main></div><footer class="footer footer__base"><ul class=footer__list><li class=footer__item>&copy;
+Sorosh Nejad, 2015-2023</li></ul></footer><script type=text/javascript src=/js/medium-zoom.min.1248fa75275e5ef0cbef27e8c1e27dc507c445ae3a2c7d2ed0be0809555dac64.js integrity="sha256-Ekj6dSdeXvDL7yfoweJ9xQfERa46LH0u0L4ICVVdrGQ=" crossorigin=anonymous></script></body></html>
