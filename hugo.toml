@@ -12,6 +12,7 @@ description = "Cloud engineer - Backend developer - AppSec speciallist"
 profilePicture = "images/profile2.jpg"
 mainSections = ["blog"]
 readMore = true
+displayMode = "dark"
 
 ## Social links
 # use 'fab' when brand icons, use 'fas' when standard solid icons.
@@ -53,7 +54,7 @@ url = "https://linkedin.com/in/nejads/"
   [[menu.main]]
   name = "About"
   weight = 4
-  url = "about"
+  url = "/about/"
 
   [[menu.main]]
   name = "CV"

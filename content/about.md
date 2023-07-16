@@ -14,7 +14,7 @@ I'm
 - AWS cloud engineer :cloud:
 - Java backend developer :coffee:
 - The application security speciallist :key:
-- Father of two + one 👨‍👩‍👦‍👦 :dog:
+- Husband, father of two, a dog lover 👨‍👩‍👦‍👦 :dog:
 - Sourdough breads and Neapolitan pizza baker :pizza:
 
 # Long Version
