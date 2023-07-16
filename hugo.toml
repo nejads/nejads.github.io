@@ -7,5 +7,55 @@ enableEmoji = true
 [params]
 title = "Sorosh Nejad"
 author = "Sorosh Nejad"
+copyright = "Sorosh Nejad, 2015-{{ YEAR }}"
 description = "Cloud engineer - Backend developer - AppSec speciallist"
-profilePicture = "images/profile.jpg"
+profilePicture = "images/profile2.jpg"
+mainSections = ["blog"]
+readMore = true
+
+## Social links
+# use 'fab' when brand icons, use 'fas' when standard solid icons.
+[[params.socialIcons]]
+icon = "fab fa-github"
+title = "GitHub"
+url = "https://github.com/nejads"
+
+[[params.socialIcons]]
+icon = "fas fa-envelope"
+title = "e-mail"
+url = "mailto:nejads[@]me[.]com"
+
+[[params.socialIcons]]
+icon = "fab fa-linkedin"
+title = "LinkedIn"
+url = "https://linkedin.com/in/nejads/"
+
+## Menu items
+[menu]
+
+  [[menu.main]]
+  name = "Home"
+  identifier = "home"
+  weight = 1
+  url = "/"
+
+  [[menu.main]]
+  name = "Blog"
+  weight = 2
+  identifier = "blog"
+  url = "/blog/"
+
+  [[menu.main]]
+  name = "Today I Learned"
+  weight = 3
+  url = "https://github.com/nejads/til"
+
+  [[menu.main]]
+  name = "About"
+  weight = 4
+  url = "about"
+
+  [[menu.main]]
+  name = "CV"
+  weight = 5
+  url = "/files/cv.pdf"
