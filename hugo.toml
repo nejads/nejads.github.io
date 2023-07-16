@@ -1,0 +1,11 @@
+baseURL = 'https://nejads.github.io/'
+languageCode = 'en-us'
+title = 'My Professional Website'
+theme = 'anatole'
+enableEmoji = true
+
+[params]
+title = "Sorosh Nejad"
+author = "Sorosh Nejad"
+description = "Cloud engineer - Backend developer - AppSec speciallist"
+profilePicture = "images/profile.jpg"
